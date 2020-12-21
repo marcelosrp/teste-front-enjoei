@@ -9,7 +9,12 @@ export const SkeletonWrapper = styled.div`
   position: relative;
   width: 230px;
 
-  ::before {
+  @media (max-width: 700px) {
+    height: 155px;
+    width: 155px;
+  }
+
+  &::before {
     content: "";
     display: block;
     position: absolute;
