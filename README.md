@@ -13,7 +13,7 @@ Agradeço muito pela oportunidade.
 
 ## Como rodar o projeto:
 
-- Clone o projeto;
+Clone o projeto;
 
 ### `Yarn install` ou `npm install`
 Para instalar as dependências;
