@@ -10,7 +10,7 @@ export const GlobalStorage = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [notFound, setNotFound] = useState(false);
-  const [error, setError] = useState(false);
+  const [inputError, setInputError] = useState(false);
   const [requestError, setRequestError] = useState(false);
 
   const getData = useCallback(async (term = null) => {
@@ -95,9 +95,9 @@ export const GlobalStorage = ({ children }) => {
 
   const handleClickSearch = () => {
     if (search === "") {
-      setError(true);
+      setInputError(true);
     } else {
-      setError(false);
+      setInputError(false);
       getData(search);
     }
   };
@@ -120,7 +120,7 @@ export const GlobalStorage = ({ children }) => {
         handleResetSearch,
         handleClickSearch,
         notFound,
-        error,
+        inputError,
         requestError,
       }}
     >

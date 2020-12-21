@@ -13,7 +13,7 @@ const Search = () => {
     search,
     handleResetSearch,
     handleClickSearch,
-    error,
+    inputError,
   } = useContext(GlobalContext);
 
   return (
@@ -21,7 +21,11 @@ const Search = () => {
       {search && (
         <Reset label="limpar filtro" handleClick={handleResetSearch} />
       )}
-      <Input handleChange={handleInputSearch} search={search} error={error} />
+      <Input
+        handleChange={handleInputSearch}
+        search={search}
+        error={inputError}
+      />
       <Button handleClick={handleClickSearch} />
     </S.Wrapper>
   );

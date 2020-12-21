@@ -18,6 +18,11 @@ export const InputWrapper = styled.input`
   border-radius: 3px;
   height: 40px;
   padding: 0 50px 0 10px;
+  transition: all 0.3s ease;
+
+  &:focus {
+    border-color: var(--color-input-focus);
+  }
 
   @media (max-width: 700px) {
     width: 100%;

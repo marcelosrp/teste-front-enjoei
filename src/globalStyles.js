@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
     --color-original-price: #222222;
     --bgcolor-discount: #f05b78;
     --color-discount: #fff;
+    --color-input-focus: #4F2D32;
   }
 
   * {
