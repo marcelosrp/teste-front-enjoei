@@ -59,6 +59,12 @@ const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
     padding-bottom: 20px;
   }
+
+  .error-text {
+    font-size: 22px;
+    margin: 30px 0;
+    text-align: center;
+  }
 `;
 
 export default GlobalStyle;

@@ -11,73 +11,78 @@ export const GlobalStorage = ({ children }) => {
   const [search, setSearch] = useState("");
   const [notFound, setNotFound] = useState(false);
   const [error, setError] = useState(false);
+  const [requestError, setRequestError] = useState(false);
 
   const getData = useCallback(async (term = null) => {
     setLoading(true);
     setNotFound(false);
     setTotal(null);
+    setRequestError(false);
     setData([]);
 
-    const response = await axios.post(
-      API_URL,
-      {
-        query: `
-          query searchProducts(
-            $term: String!,
-            $first: Int,
-            $after: String
-          ) {
-            search(products: {
-              term: $term
-            }) {
-              products(first: $first, after: $after) {
-                total
-                edges {
-                  cursor
-                  node {
-                    id
-                    path
-                    photo {
-                      image_public_id
-                    }
-                    title {
-                      name
-                    }
-                    brand {
-                      displayable_name
-                    }
-                    price {
-                      original
-                      current
+    try {
+      const response = await axios.post(
+        API_URL,
+        {
+          query: `
+            query searchProducts(
+              $term: String!,
+              $first: Int,
+              $after: String
+            ) {
+              search(products: {
+                term: $term
+              }) {
+                products(first: $first, after: $after) {
+                  total
+                  edges {
+                    cursor
+                    node {
+                      id
+                      path
+                      photo {
+                        image_public_id
+                      }
+                      title {
+                        name
+                      }
+                      brand {
+                        displayable_name
+                      }
+                      price {
+                        original
+                        current
+                      }
                     }
                   }
                 }
               }
             }
-          }
-        `,
-        variables: {
-          term: term === null ? "" : term,
-          first: 15,
+          `,
+          variables: {
+            term: term === null ? "" : term,
+            first: 15,
+          },
         },
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const json = response.data.data.search.products;
+
+      if (json.total === 0) {
+        setNotFound(true);
+      } else {
+        setData(json.edges);
       }
-    );
 
-    const json = response.data.data.search.products;
-
-    if (json.total === 0) {
-      setNotFound(true);
-    } else {
-      setData(json.edges);
+      setTotal(json.total);
+      setLoading(false);
+    } catch (error) {
+      setRequestError(true);
     }
-
-    setTotal(json.total);
-    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -116,6 +121,7 @@ export const GlobalStorage = ({ children }) => {
         handleClickSearch,
         notFound,
         error,
+        requestError,
       }}
     >
       {children}
