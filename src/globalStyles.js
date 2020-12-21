@@ -39,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 15px 0;
+    padding: 15px 10px;
     width: 1280px;
     max-width: 100%;
     margin: 0 auto;
